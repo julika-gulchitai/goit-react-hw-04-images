@@ -42,20 +42,21 @@ export const App = () => {
   };
 
   const openModal = url => {
+    setModal(prev => !prev);
     setModalurl(url);
-    setModal(true);
   };
 
   const closeModal = () => {
     setModal(false);
   };
+
   const onLoadMore = () => {
     setPage(page => page + 1);
   };
 
   let aLotOfImage = false;
   if (images && images.length >= 12) aLotOfImage = true;
-
+  console.log(modal, modalurl);
   console.log(images);
   return (
     <div className={s.App}>
@@ -65,7 +66,7 @@ export const App = () => {
       {!images.length && !loading && (
         <h2 className={s.Notify}>Sorry! Nothing found! Try again, please!</h2>
       )}
-      {modal && <Modal url={modalurl} closeModal={closeModal} />}
+      {modal && <Modal modalurl={modalurl} closeModal={closeModal} />}
       {aLotOfImage && <Button addMoreImages={onLoadMore} />}
     </div>
   );
